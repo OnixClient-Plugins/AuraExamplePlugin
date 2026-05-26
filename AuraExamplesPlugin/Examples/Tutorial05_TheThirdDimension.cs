@@ -102,7 +102,7 @@ namespace AuraExamplesPlugin.Examples {
         }
 
         public Tutorial05_TheThirdDimension(IAuraBackend backend) {
-            rasterizerState = backend.CreateRasterizerState(new RasterizerStateDesc(CullMode.Front));
+            rasterizerState = backend.CreateRasterizerState(new RasterizerStateDesc(CullMode.Back));
             blendState = backend.CreateBlendState(new BlendStateDesc(true)); 
             depthStencilState = backend.CreateDepthStencilState(new DepthStencilStateDesc(true, false)); // enable depth testing
             _ = GetUpdatedDepthBuffer(backend); // this will pre-create our depth stencil buffer.
@@ -124,7 +124,7 @@ namespace AuraExamplesPlugin.Examples {
 
             // since we upload a struct[], we don't need to set the ElementSizeInBytes
             float size = 0.5f;
-            /*
+            
             var vertices = new MyVertex[] {
                 // Front face (Z+)
                 new MyVertex { position = new Vec3(-size,  size,  size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 0.0f) },
@@ -173,63 +173,14 @@ namespace AuraExamplesPlugin.Examples {
                 new MyVertex { position = new Vec3(-size, -size, -size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 1.0f) },
                 new MyVertex { position = new Vec3( size, -size,  size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 0.0f) },
                 new MyVertex { position = new Vec3( size, -size, -size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 1.0f) },
-            };*/
-            
-               var vertices = new MyVertex[] {
-                   // Front face (Z+)
-                   new MyVertex { position = new Vec3(-size, -size,  size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 1.0f) },
-                   new MyVertex { position = new Vec3( size,  size,  size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 0.0f) },
-                   new MyVertex { position = new Vec3(-size,  size,  size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 0.0f) },
-                   new MyVertex { position = new Vec3( size, -size,  size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 1.0f) },
-                   new MyVertex { position = new Vec3( size,  size,  size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 0.0f) },
-                   new MyVertex { position = new Vec3(-size, -size,  size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 1.0f) },
-
-                   // Back face (Z-)
-                   new MyVertex { position = new Vec3( size, -size, -size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 1.0f) },
-                   new MyVertex { position = new Vec3(-size,  size, -size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 0.0f) },
-                   new MyVertex { position = new Vec3( size,  size, -size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 0.0f) },
-                   new MyVertex { position = new Vec3(-size, -size, -size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 1.0f) },
-                   new MyVertex { position = new Vec3(-size,  size, -size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 0.0f) },
-                   new MyVertex { position = new Vec3( size, -size, -size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 1.0f) },
-
-                   // Left face (X-)
-                   new MyVertex { position = new Vec3(-size, -size, -size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 1.0f) },
-                   new MyVertex { position = new Vec3(-size,  size,  size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 0.0f) },
-                   new MyVertex { position = new Vec3(-size,  size, -size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 0.0f) },
-                   new MyVertex { position = new Vec3(-size, -size,  size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 1.0f) },
-                   new MyVertex { position = new Vec3(-size,  size,  size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 0.0f) },
-                   new MyVertex { position = new Vec3(-size, -size, -size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 1.0f) },
-
-                   // Right face (X+)
-                   new MyVertex { position = new Vec3( size, -size,  size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 1.0f) },
-                   new MyVertex { position = new Vec3( size,  size, -size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 0.0f) },
-                   new MyVertex { position = new Vec3( size,  size,  size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 0.0f) },
-                   new MyVertex { position = new Vec3( size, -size, -size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 1.0f) },
-                   new MyVertex { position = new Vec3( size,  size, -size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 0.0f) },
-                   new MyVertex { position = new Vec3( size, -size,  size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 1.0f) },
-
-                   // Top face (Y+)
-                   new MyVertex { position = new Vec3(-size,  size,  size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 1.0f) },
-                   new MyVertex { position = new Vec3( size,  size, -size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 0.0f) },
-                   new MyVertex { position = new Vec3(-size,  size, -size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 0.0f) },
-                   new MyVertex { position = new Vec3( size,  size,  size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 1.0f) },
-                   new MyVertex { position = new Vec3( size,  size, -size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 0.0f) },
-                   new MyVertex { position = new Vec3(-size,  size,  size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 1.0f) },
-
-                   // Bottom face (Y-)
-                   new MyVertex { position = new Vec3(-size, -size, -size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 1.0f) },
-                   new MyVertex { position = new Vec3( size, -size,  size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 0.0f) },
-                   new MyVertex { position = new Vec3(-size, -size,  size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 0.0f) },
-                   new MyVertex { position = new Vec3( size, -size, -size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 1.0f) },
-                   new MyVertex { position = new Vec3( size, -size,  size), color=0xFFFFFFFF, uv = new Vec2(1.0f, 0.0f) },
-                   new MyVertex { position = new Vec3(-size, -size, -size), color=0xFFFFFFFF, uv = new Vec2(0.0f, 1.0f) },
-               };
+            };
             vertexBuffer.Upload(vertices);
         }
+
         public override void Render(IAuraBackend backend, float deltaTime) {
             // never forget to dispose any reference to the back buffer target, otherwise you get a straight crash.
             using var backBuffer = backend.GetBackBufferTarget();
-            var texture = TryLoadTexture(backend);
+            using var texture = TryLoadTexture(backend); // dont forget it needs to be disposed when you're done.
             if (texture == null)
                 return; // pack it up guys, draw's not for this frame.
             // forgetting this and you don't see anything.
@@ -252,11 +203,13 @@ namespace AuraExamplesPlugin.Examples {
             float rotationSpeed = 180.0f; // degrees per second
             cubeAngle += rotationSpeed * deltaTime; // accumulate each frame
             
-            // we need to use left handed for Direct X
+            // set up how the view and projection should be. setting up camera position and perspective.
+            TransformationMatrix myView = TransformationMatrix.LookAt(new Vec3(0, 3, -5), new Vec3(0, 0, 0), new Vec3(0, 1, 0));
+            TransformationMatrix myProj = TransformationMatrix.PerspectiveFov(80, backBuffer.Widthf, backBuffer.Heightf, 0.025f, 2500f);
             TransformationMatrix finalMatrix =
-                TransformationMatrix.RotateY(cubeAngle) * // and then here goes our model matrix to transform the model, here we rotate it
-                TransformationMatrix.LookAt(new Vec3(-0, 3, -5), new Vec3(0, 0, 0), new Vec3(0, 1, 0), TransformationMatrix.ViewHandedness.Left) * // Set where the camera is facing, you'd probably want a better camera class but for now this works.
-                TransformationMatrix.PerspectiveFov(80, backBuffer.Widthf, backBuffer.Heightf, 0.025f, 2500f, TransformationMatrix.PerspectiveHandedness.Left_ZeroToOne) * // Set our perspective matrix that takes depth into consideration. The near/far defaults to the same as minecraft
+                TransformationMatrix.RotateY(cubeAngle) *
+                myView *
+                myProj *
                 TransformationMatrix.Identity();
             
             //finalMatrix =
@@ -266,6 +219,7 @@ namespace AuraExamplesPlugin.Examples {
             //    Onix.Render.AuraHelpers.WorldProjectionMatrix * 
             //    TransformationMatrix.Identity();
 
+            
             // Constant buffer!
             MyConstantBuffer constantBufferData = new MyConstantBuffer() {
                 // convert our final matrix to an aura matrix.
@@ -285,11 +239,11 @@ namespace AuraExamplesPlugin.Examples {
             rasterizerState.Dispose();
             blendState.Dispose();
             depthStencilState.Dispose();
+            depthStencilBuffer?.Dispose();
             vertexBuffer.Dispose();
             constantBuffer.Dispose();
             shader.Dispose();
             nearestSampler.Dispose();
-            depthStencilBuffer?.Dispose();
         }
         
     }
