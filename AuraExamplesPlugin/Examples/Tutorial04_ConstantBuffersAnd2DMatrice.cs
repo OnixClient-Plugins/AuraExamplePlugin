@@ -125,7 +125,7 @@ namespace AuraExamplesPlugin.Examples {
         public override void Render(IAuraBackend backend, float deltaTime) {
             // never forget to dispose any reference to the back buffer target, otherwise you get a straight crash.
             using var backBuffer = backend.GetBackBufferTarget();
-            var texture = TryLoadTexture(backend);
+            using var texture = TryLoadTexture(backend); // dont forget it needs to be disposed when you're done.
             if (texture == null)
                 return; // pack it up guys, draw's not for this frame.
             // forgetting this and you don't see anything.

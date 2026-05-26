@@ -176,6 +176,7 @@ namespace AuraExamplesPlugin.Examples {
             constantBuffer.Dispose();
             shader.Dispose();
             nearestSampler.Dispose();
+            backBufferTexture?.Dispose();
         }
         
     }
