@@ -1,0 +1,13 @@
+{
+  "uuid": "b546ad5b-b05c-4410-8921-a21fc78cbf41",
+  "plugin_name": "AuraExamplesPlugin",
+  "plugin_author": "OnixClientMC",
+  "plugin_description": "Examples for the low level aura rendering engine of the API.",
+  "plugin_version": "1.0.0",
+  "game_version": "1.26.20",
+  "supported_game_version_ranges": [
+    "0.0.0-9.99.9"
+  ],
+  "runtime_version": 7,
+  "target_assembly": "AuraExamplesPlugin.dll"
+}
