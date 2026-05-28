@@ -8,6 +8,6 @@
   "supported_game_version_ranges": [
     "0.0.0-9.99.9"
   ],
-  "runtime_version": 7,
+  "runtime_version": 8,
   "target_assembly": "AuraExamplesPlugin.dll"
 }
