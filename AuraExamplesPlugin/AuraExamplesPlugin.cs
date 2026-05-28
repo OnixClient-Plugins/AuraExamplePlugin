@@ -70,6 +70,7 @@ namespace AuraExamplesPlugin {
         }
 
         private void OnWorldRender(RendererWorld gfx, float delta) {
+            currentExample?.OnWorldRender(gfx, delta);
         }
 
         private bool OnHudInput(InputKey key, bool isDown) {
