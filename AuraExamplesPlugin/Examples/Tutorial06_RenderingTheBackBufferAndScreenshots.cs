@@ -11,8 +11,6 @@ using System.Text;
 using Vanara.PInvoke;
 
 namespace AuraExamplesPlugin.Examples {
-    // Passing in some data for all shader invocations!
-    // and using 2d matrices to finally render to more familiar coordinates, outputting something that isn't all squished depending on window size.
     internal class Tutorial06_RenderingTheBackBufferAndScreenshots : AuraExampleBase {
 
 

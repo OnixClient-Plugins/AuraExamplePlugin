@@ -10,16 +10,14 @@ using System.Text;
 using Vanara.PInvoke;
 
 namespace AuraExamplesPlugin.Examples {
-    // Passing in some data for all shader invocations!
-    // and using 2d matrices to finally render to more familiar coordinates, outputting something that isn't all squished depending on window size.
     internal class Tutorial05_TheThirdDimension : AuraExampleBase {
 
         /// This is our vertex layout, we send a position and color for every vertex right now.
         [StructLayout(LayoutKind.Sequential)]
         struct MyVertex {
             public Vec3 position;
-            public uint color; // we can keep our color for tinting!
-            public Vec2 uv; // added the uv coordinates of course.
+            public uint color;
+            public Vec2 uv;
         }
         // Constant buffers are 16 bytes aligned in direct x.
         [StructLayout(LayoutKind.Sequential, Pack = 16)]
