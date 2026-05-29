@@ -21,6 +21,7 @@ Aura is the low-level DirectX 11 and DirectX 12 wrapper rendering backend expose
 | 5 | `Tutorial05_TheThirdDimension` | 3D vertices, perspective projection, depth buffers, rotation and view matrices (game/custom world view)     |
 | 6 | `Tutorial06_RenderingTheBackBufferAndScreenshots` | Back-buffer capture, screenshot export, texture overlay effects                                             |
 | 7 | `Tutorial07_PseudoWorldRendering` | Rendering into a texture and displaying that texture in the world                                           |
+| 8 | `Tutorial08_ComputeShaders` | Compute shader compilation, unordered-access textures, dispatching thread groups, sampling compute output   |
 
 A bonus file, `AuraInItsOwnWindow.cs`, demonstrates initializing a D3D11 backend in a separate Win32 window entirely outside the game. Not necessarily useful often but could come in handy for some weird situation.
 

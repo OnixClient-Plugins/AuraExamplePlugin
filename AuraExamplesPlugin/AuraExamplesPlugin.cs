@@ -34,7 +34,7 @@ namespace AuraExamplesPlugin {
         private AuraExampleBase? currentExample = null;
         private void RenderingOnLowLevelAuraRender(IAuraBackend backend, float deltaTime, string screenName, bool isHudHidden, bool isClientUi) {
             // switch to any example here!!
-            currentExample ??= new Tutorial01_HelloTriangle(backend);
+            currentExample ??= new Tutorial08_ComputeShaders(backend);
             currentExample.Render(backend, deltaTime);
         }
         // This is VERY important. You'll likely crash at the first resize otherwise.
