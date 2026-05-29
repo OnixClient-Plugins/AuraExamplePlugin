@@ -57,10 +57,13 @@ namespace AuraExamplesPlugin {
             // Ensure every task or thread is stopped when this function returns.
             // You can give them base.PluginEjectionCancellationToken which will be cancelled when this function returns. 
             Console.WriteLine($"Plugin {CurrentPluginManifest.Name} unloaded!");
+            OnDisabled();
             Onix.Events.Common.Tick -= OnTick;
             Onix.Events.Common.HudRenderGame -= OnHudRenderGame;
             Onix.Events.Common.WorldRender -= OnWorldRender;
             Onix.Events.Common.HudInput -= OnHudInput;
+            Onix.Events.Rendering.LowLevelAuraRender -= RenderingOnLowLevelAuraRender;
+            Onix.Events.Rendering.AuraDeviceLost -= RenderingOnAuraDeviceLost;
         }
 
         private void OnTick() {

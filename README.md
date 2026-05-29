@@ -20,6 +20,7 @@ Aura is the low-level DirectX 11 and DirectX 12 wrapper rendering backend expose
 | 4 | `Tutorial04_ConstantBuffersAnd2DMatrices` | Constant buffers, orthographic projection, pixel-coordinate positioning, time-based animation               |
 | 5 | `Tutorial05_TheThirdDimension` | 3D vertices, perspective projection, depth buffers, rotation and view matrices (game/custom world view)     |
 | 6 | `Tutorial06_RenderingTheBackBufferAndScreenshots` | Back-buffer capture, screenshot export, texture overlay effects                                             |
+| 7 | `Tutorial07_PseudoWorldRendering` | Rendering into a texture and displaying that texture in the world                                           |
 
 A bonus file, `AuraInItsOwnWindow.cs`, demonstrates initializing a D3D11 backend in a separate Win32 window entirely outside the game. Not necessarily useful often but could come in handy for some weird situation.
 
@@ -39,7 +40,7 @@ Open `AuraExamplesPlugin.sln` in Visual Studio and build the `x64` configuration
 To build from the command line:
 
 ```
-dotnet build AuraExamplesPlugin.sln -c Debug -r win-x64
+dotnet build AuraExamplesPlugin/AuraExamplesPlugin.csproj -c Debug
 ```
 
 ---
@@ -50,7 +51,7 @@ Inside `AuraExamplesPlugin.cs`, find the field that holds the active example and
 
 ```csharp
 // Swap this to any of the Tutorial0X_ classes
-private AuraExampleBase _currentExample = new Tutorial01_HelloTriangle();
+currentExample ??= new Tutorial01_HelloTriangle(backend);
 ```
 
 Rebuild and reload the plugin in-game to see the new example.

@@ -1,4 +1,3 @@
-﻿using OnixRuntime.Api.Aura;
 using OnixRuntime.Api.Aura;
 using OnixRuntime.Api.NBT;
 using OnixRuntime.Api.Rendering;
