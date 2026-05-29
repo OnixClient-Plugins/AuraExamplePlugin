@@ -24,7 +24,10 @@ namespace AuraExamplesPlugin.Examples {
         struct MyConstantBuffer {
             // Not using TransformationMatrix here since that one contains a 3x2 matrix at the end too.
             public TransformationMatrixAura mat; // size of that is 64 so we're on that 16 bytes alignment 
-            public float time; // we would need padding for fields below if. don't need padding for the last field since pack 16.
+            public float time;
+            private float padding0;
+            private float padding1;
+            private float padding2;
         }
 
         // The code of our vertex and pixel shaders,. Of course you can get this shader code however you want.
