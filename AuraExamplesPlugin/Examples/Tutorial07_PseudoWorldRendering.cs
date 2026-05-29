@@ -17,7 +17,7 @@ namespace AuraExamplesPlugin.Examples {
         /// This is our vertex layout, we send a position and color for every vertex right now.
         [StructLayout(LayoutKind.Sequential)]
         struct MyVertex {
-            public Vec3 position;
+            public Vec2 position;
             public Vec2 uv;
         }
         // Constant buffers are 16 bytes aligned in direct x.
@@ -179,7 +179,7 @@ namespace AuraExamplesPlugin.Examples {
                 return;
             }
             shader.SetRecommendedInputLayout(new ShaderInputLayoutDesc([
-                new () {Type = AuraFormatType.Float3, SemanticName = "POSITION"},
+                new () {Type = AuraFormatType.Float2, SemanticName = "POSITION"},
                 new () {Type = AuraFormatType.Float2, SemanticName = "TEXCOORD"},
             ]));
 
@@ -187,26 +187,22 @@ namespace AuraExamplesPlugin.Examples {
             // this is a full screen quad
             MyVertex[] vertices =
             [
-                new() { position = new Vec3(-1, -1, 0), uv = new Vec2(0, 1) }, // bottom-left
-                new() { position = new Vec3(-1,  1, 0), uv = new Vec2(0, 0) }, // top-left
-                new() { position = new Vec3( 1,  1, 0), uv = new Vec2(1, 0) }, // top-right
+                new() { position = new Vec2(-1, -1), uv = new Vec2(0, 1) }, // bottom-left
+                new() { position = new Vec2(-1,  1), uv = new Vec2(0, 0) }, // top-left
+                new() { position = new Vec2( 1,  1), uv = new Vec2(1, 0) }, // top-right
 
-                new() { position = new Vec3(-1, -1, 0), uv = new Vec2(0, 1) }, // bottom-left
-                new() { position = new Vec3( 1,  1, 0), uv = new Vec2(1, 0) }, // top-right
-                new() { position = new Vec3( 1, -1, 0), uv = new Vec2(1, 1) }, // bottom-right
+                new() { position = new Vec2(-1, -1), uv = new Vec2(0, 1) }, // bottom-left
+                new() { position = new Vec2( 1,  1), uv = new Vec2(1, 0) }, // top-right
+                new() { position = new Vec2( 1, -1), uv = new Vec2(1, 1) }, // bottom-right
             ];
             vertexBuffer.Upload(vertices);
         }
 
         public override void Render(IAuraBackend backend, float deltaTime) {
             if (!hasUploadedTexture) return;
-            // never forget to dispose any reference to the back buffer target, otherwise you get a straight crash.
-            using var backBuffer = backend.GetBackBufferTarget();
             using var texture = TryLoadTexture(backend); // dont forget it needs to be disposed when you're done.
             if (texture == null)
                 return; // pack it up guys, draw's not for this frame.
-            // forgetting this and you don't see anything.
-            backend.SetViewport(0.0f, 0.0f, backBuffer.Widthf, backBuffer.Heightf);
             backend.SetPrimitiveTopology(PrimitiveTopology.TriangleList);
 
             // bind our pipeline
@@ -218,6 +214,7 @@ namespace AuraExamplesPlugin.Examples {
             
             // now we bind our render target to draw to it
             backend.BindRenderTarget(fakeTextureTarget);
+            backend.SetViewport(0.0f, 0.0f, fakeTextureTarget.Widthf, fakeTextureTarget.Heightf);
             
             // Constant buffer data!
             MyConstantBuffer constantBufferData = new MyConstantBuffer() {
