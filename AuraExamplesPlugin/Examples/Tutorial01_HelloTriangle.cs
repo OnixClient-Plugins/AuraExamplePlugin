@@ -76,6 +76,7 @@ namespace AuraExamplesPlugin.Examples {
             using var backBuffer = backend.GetBackBufferTarget();
             // forgetting this and you don't see anything.
             backend.SetViewport(0.0f, 0.0f, backBuffer.Widthf, backBuffer.Heightf);
+            backend.SetScissorRect(0, 0, (int)backBuffer.Width, (int)backBuffer.Height);
             backend.SetPrimitiveTopology(PrimitiveTopology.TriangleList);
 
             // bind our pipeline

@@ -215,7 +215,8 @@ namespace AuraExamplesPlugin.Examples {
             // now we bind our render target to draw to it
             backend.BindRenderTarget(fakeTextureTarget);
             backend.SetViewport(0.0f, 0.0f, fakeTextureTarget.Widthf, fakeTextureTarget.Heightf);
-            
+            backend.SetScissorRect(0, 0, (int)fakeTextureTarget.Width, (int)fakeTextureTarget.Height);
+
             // Constant buffer data!
             MyConstantBuffer constantBufferData = new MyConstantBuffer() {
                 timeResolution = new Vec4((float)stopwatch.Elapsed.TotalSeconds, fakeTextureTarget.Widthf / fakeTextureTarget.Heightf, 0, 0)

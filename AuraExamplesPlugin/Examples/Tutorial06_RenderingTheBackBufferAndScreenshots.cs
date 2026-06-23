@@ -145,6 +145,7 @@ namespace AuraExamplesPlugin.Examples {
             SaveImage(backend, texture); // we dont need a copy here, but it avoids making a temporary variable to hold the texture so we can dispose it.
             // forgetting this and you don't see anything.
             backend.SetViewport(0.0f, 0.0f, backBuffer.Widthf, backBuffer.Heightf);
+            backend.SetScissorRect(0, 0, (int)backBuffer.Width, (int)backBuffer.Height);
             backend.SetPrimitiveTopology(PrimitiveTopology.TriangleList);
 
             // bind our pipeline

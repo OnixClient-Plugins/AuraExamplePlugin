@@ -203,6 +203,7 @@ namespace AuraExamplesPlugin.Examples {
             // Step 2: draw the texture the compute shader just filled.
             // From this point on, this looks like the earlier texture tutorial.
             backend.SetViewport(0.0f, 0.0f, backBuffer.Widthf, backBuffer.Heightf);
+            backend.SetScissorRect(0, 0, (int)backBuffer.Width, (int)backBuffer.Height);
             backend.SetPrimitiveTopology(PrimitiveTopology.TriangleList);
             backend.BindRasterizerState(rasterizerState);
             backend.BindBlendState(blendState);
