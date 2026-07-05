@@ -167,7 +167,7 @@ namespace AuraExamplesPlugin.Examples {
             rasterizerState = backend.CreateRasterizerState(new RasterizerStateDesc(CullMode.Back));
             blendState = backend.CreateBlendState(new BlendStateDesc(true)); 
             depthStencilState = backend.CreateDepthStencilState(new DepthStencilStateDesc(false, false));
-            vertexBuffer = backend.CreateBuffer(new AuraBufferDesc((ulong)Marshal.SizeOf<MyVertex>() * 6, BufferBindUsage.VertexBuffer));
+            vertexBuffer = backend.CreateBuffer(new AuraBufferDesc((ulong)Marshal.SizeOf<MyVertex>() * 6, BufferBindUsage.VertexBuffer, false)); // dynamic is for buffers you update every draw (could get away with every few draws)
             constantBuffer = backend.CreateBuffer(new AuraBufferDesc((ulong)Marshal.SizeOf<MyConstantBuffer>(), BufferBindUsage.ConstantBuffer, true));
             //create our own render target matching the texture's size for convenience.
             fakeTextureTarget = backend.CreateRenderTarget(new RenderTargetDesc((uint)fakeTextureSize.X, (uint)fakeTextureSize.Y, AuraColorFormat.RGBA8));

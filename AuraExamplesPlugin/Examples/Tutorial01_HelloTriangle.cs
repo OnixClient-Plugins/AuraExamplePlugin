@@ -51,7 +51,7 @@ namespace AuraExamplesPlugin.Examples {
             rasterizerState = backend.CreateRasterizerState(new RasterizerStateDesc(CullMode.Back));
             blendState = backend.CreateBlendState(new BlendStateDesc(false));
             depthStencilState = backend.CreateDepthStencilState(new DepthStencilStateDesc(false, false));
-            vertexBuffer = backend.CreateBuffer(new AuraBufferDesc((ulong)Marshal.SizeOf<MyVertex>() * 3, BufferBindUsage.VertexBuffer));
+            vertexBuffer = backend.CreateBuffer(new AuraBufferDesc((ulong)Marshal.SizeOf<MyVertex>() * 3, BufferBindUsage.VertexBuffer, false)); // dynamic is for buffers you update every draw (could get away with every few draws)
 
             shader = backend.CreateShaderProgram();
             if (shader.Compile(_shaderCode, false) is { } shaderCompileError) {

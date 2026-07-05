@@ -71,8 +71,8 @@ namespace AuraExamplesPlugin.Examples {
             rasterizerState = backend.CreateRasterizerState(new RasterizerStateDesc(CullMode.Back));
             blendState = backend.CreateBlendState(new BlendStateDesc(true));
             depthStencilState = backend.CreateDepthStencilState(new DepthStencilStateDesc(false, false));
-            vertexBuffer = backend.CreateBuffer(new AuraBufferDesc((ulong)Marshal.SizeOf<MyVertex>() * 4, BufferBindUsage.VertexBuffer)); // now we have 4 unique vertices
-            indexBuffer = backend.CreateBuffer(new AuraBufferDesc((ulong)Marshal.SizeOf<short>() * 6, BufferBindUsage.IndexBuffer)); // we have 6 vertices to reference
+            vertexBuffer = backend.CreateBuffer(new AuraBufferDesc((ulong)Marshal.SizeOf<MyVertex>() * 4, BufferBindUsage.VertexBuffer, false)); // dynamic is for buffers you update every draw (could get away with every few draws) // now we have 4 unique vertices
+            indexBuffer = backend.CreateBuffer(new AuraBufferDesc((ulong)Marshal.SizeOf<short>() * 6, BufferBindUsage.IndexBuffer, false)); // dynamic is for buffers you update every draw (could get away with every few draws) // we have 6 vertices to reference
             nearestSampler = backend.CreateSampler(new SamplerDesc(AuraSamplerFilterType.MinMagMipPoint, AuraSamplerAddressMode.Mirror));
 
             shader = backend.CreateShaderProgram();

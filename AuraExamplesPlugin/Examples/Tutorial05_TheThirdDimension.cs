@@ -107,7 +107,7 @@ namespace AuraExamplesPlugin.Examples {
             blendState = backend.CreateBlendState(new BlendStateDesc(true)); 
             depthStencilState = backend.CreateDepthStencilState(new DepthStencilStateDesc(true, false)); // enable depth testing
             _ = GetUpdatedDepthBuffer(backend); // this will pre-create our depth stencil buffer.
-            vertexBuffer = backend.CreateBuffer(new AuraBufferDesc((ulong)Marshal.SizeOf<MyVertex>() * 36, BufferBindUsage.VertexBuffer));
+            vertexBuffer = backend.CreateBuffer(new AuraBufferDesc((ulong)Marshal.SizeOf<MyVertex>() * 36, BufferBindUsage.VertexBuffer, false)); // dynamic is for buffers you update every draw (could get away with every few draws)
             constantBuffer = backend.CreateBuffer(new AuraBufferDesc((ulong)Marshal.SizeOf<MyConstantBuffer>(), BufferBindUsage.ConstantBuffer, true));
             nearestSampler = backend.CreateSampler(new SamplerDesc(AuraSamplerFilterType.MinMagMipPoint, AuraSamplerAddressMode.Mirror));
 
@@ -214,12 +214,12 @@ namespace AuraExamplesPlugin.Examples {
                 myProj *
                 TransformationMatrix.Identity();
             
-            //finalMatrix =
-            //    TransformationMatrix.RotateY(cubeAngle) * // and then here goes our model matrix to transform the model, here we rotate it
-            //    TransformationMatrix.TranslateWorldPosition(Onix.Render.AuraHelpers.WorldOrigin, new Vec3(0.5f, 5.5f, 0.5f)) * // place it in the world
-            //    Onix.Render.AuraHelpers.WorldViewMatrix *
-            //    Onix.Render.AuraHelpers.WorldProjectionMatrix * 
-            //    TransformationMatrix.Identity();
+            finalMatrix =
+                //TransformationMatrix.RotateY(cubeAngle) * // and then here goes our model matrix to transform the model, here we rotate it
+                TransformationMatrix.TranslateWorldPosition(Onix.Render.AuraHelpers.WorldOrigin, new Vec3(0.5f, 5.5f, 0.5f)) * // place it in the world
+                Onix.Render.AuraHelpers.WorldViewMatrix *
+                Onix.Render.AuraHelpers.WorldProjectionMatrix * 
+                TransformationMatrix.Identity();
 
             
             // Constant buffer!

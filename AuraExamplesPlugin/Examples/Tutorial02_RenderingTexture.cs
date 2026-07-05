@@ -79,7 +79,7 @@ namespace AuraExamplesPlugin.Examples {
             // this lets our texture's background be transparent. We also could've implemented alpha testing in our shader.
             blendState = backend.CreateBlendState(new BlendStateDesc(true));
             depthStencilState = backend.CreateDepthStencilState(new DepthStencilStateDesc(false, false));
-            vertexBuffer = backend.CreateBuffer(new AuraBufferDesc((ulong)Marshal.SizeOf<MyVertex>() * 6, BufferBindUsage.VertexBuffer)); // now we have 6!
+            vertexBuffer = backend.CreateBuffer(new AuraBufferDesc((ulong)Marshal.SizeOf<MyVertex>() * 6, BufferBindUsage.VertexBuffer, false)); // dynamic is for buffers you update every draw (could get away with every few draws) // now we have 6!
             // now we'll need a sampler to essentially scale our texture and figure out what pixels go where when resizing and also what happens when indexing out of bounds.
             nearestSampler = backend.CreateSampler(new SamplerDesc(AuraSamplerFilterType.MinMagMipPoint /* nearest neighbor */, AuraSamplerAddressMode.Mirror));
 

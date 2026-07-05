@@ -123,7 +123,7 @@ namespace AuraExamplesPlugin.Examples {
 
             // The vertex buffer is just a quad on screen. The compute shader creates the image;
             // these vertices only give us somewhere to show that image.
-            vertexBuffer = backend.CreateBuffer(new AuraBufferDesc((ulong)Marshal.SizeOf<MyVertex>() * 6, BufferBindUsage.VertexBuffer));
+            vertexBuffer = backend.CreateBuffer(new AuraBufferDesc((ulong)Marshal.SizeOf<MyVertex>() * 6, BufferBindUsage.VertexBuffer, false)); // dynamic is for buffers you update every draw (could get away with every few draws)
 
             // This buffer is updated every frame with time and texture size.
             // We bind the exact same constant buffer when running the compute shader.
